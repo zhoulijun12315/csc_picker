@@ -97,14 +97,15 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //selected init country
     if (widget.initCountryAbbr != null) {
-      _selectedCountry = _countryList.where((element) => element.abbr == widget.initCountryAbbr).last;
+      _selectedCountry =
+          _countryList.firstWhere((element) => element.abbr == widget.initCountryAbbr, orElse: () => null as Country);
       await getState();
     }
 
     //selected init state
     if (widget.initStateAbbr != null) {
-      _selectedState = _selectedCountry?.state?.where((element) => element.abbr == widget.initStateAbbr).last;
-
+      _selectedState = _selectedCountry?.state
+          ?.firstWhere((element) => element.abbr == widget.initCountryAbbr, orElse: () => null as Region);
       await getCity();
     }
 

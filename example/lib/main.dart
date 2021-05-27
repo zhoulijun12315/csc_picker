@@ -51,7 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ///Adding CSC Picker Widget in app
                 CSCPicker(
                   initCountryAbbr: 'US',
+<<<<<<< HEAD
                   initStateAbbr: 'CA',
+=======
+                  initStateAbbr: 'California',
+>>>>>>> a6ac88b... add init country/state/city for private project
                   initCity: 'Beijing',
 
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
