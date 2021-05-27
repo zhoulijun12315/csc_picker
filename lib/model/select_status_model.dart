@@ -3,6 +3,7 @@ class Country {
   String? name;
   String? emoji;
   String? emojiU;
+  String? abbr;
   List<Region>? state;
 
   Country({this.id, this.name, this.emoji, this.emojiU, this.state});
@@ -12,6 +13,8 @@ class Country {
     name = json['name'];
     emoji = json['emoji'];
     emojiU = json['emojiU'];
+    abbr = json['abbr'];
+
     if (json['state'] != null) {
       state = [];
       json['state'].forEach((v) {
@@ -26,6 +29,7 @@ class Country {
     data['name'] = this.name;
     data['emoji'] = this.emoji;
     data['emojiU'] = this.emojiU;
+    data['abbr'] = this.abbr;
     if (this.state != null) {
       data['state'] = this.state!.map((v) => v.toJson()).toList();
     }
@@ -36,6 +40,7 @@ class Country {
 class Region {
   int? id;
   String? name;
+  String? abbr;
   int? countryId;
   List<City>? city;
 
@@ -45,6 +50,7 @@ class Region {
     id = json['id'];
     name = json['name'];
     countryId = json['country_id'];
+    abbr = json['abbr'];
     if (json['city'] != null) {
       city = [];
       json['city'].forEach((v) {
@@ -58,6 +64,7 @@ class Region {
     data['id'] = this.id;
     data['name'] = this.name;
     data['country_id'] = this.countryId;
+    data['abbr'] = this.abbr;
     if (this.city != null) {
       data['city'] = this.city!.map((v) => v.toJson()).toList();
     }

@@ -50,6 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 ///Adding CSC Picker Widget in app
                 CSCPicker(
+                  initCountryAbbr: 'US',
+                  initStateAbbr: 'CA',
+                  initCity: 'Beijing',
+
                   ///Enable disable state dropdown [OPTIONAL PARAMETER]
                   showStates: true,
 
@@ -57,24 +61,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   showCities: true,
 
                   ///Enable (get flag with country name) / Disable (Disable flag) / ShowInDropdownOnly (display flag in dropdown only) [OPTIONAL PARAMETER]
-                  flagState: CountryFlag.DISABLE,
+                  flagState: CountryFlag.ENABLE,
 
                   ///Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER] (USE with disabledDropdownDecoration)
                   dropdownDecoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.white,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
+                      border: Border.all(color: Colors.grey.shade300, width: 1)),
 
                   ///Disabled Dropdown box decoration to style your dropdown selector [OPTIONAL PARAMETER]  (USE with disabled dropdownDecoration)
                   disabledDropdownDecoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.grey.shade300,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
-
-                  ///Default Country
-                  defaultCountry: DefaultCountry.India,
+                      border: Border.all(color: Colors.grey.shade300, width: 1)),
 
                   ///selected item style [OPTIONAL PARAMETER]
                   selectedItemStyle: TextStyle(
@@ -83,10 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                   ///DropdownDialog Heading style [OPTIONAL PARAMETER]
-                  dropdownHeadingStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),
+                  dropdownHeadingStyle: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
 
                   ///DropdownDialog Item style [OPTIONAL PARAMETER]
                   dropdownItemStyle: TextStyle(
@@ -104,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCountryChanged: (value) {
                     setState(() {
                       ///store value in country variable
-                      countryValue = value;
+                      countryValue = value.abbr;
                     });
                   },
 
@@ -112,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onStateChanged: (value) {
                     setState(() {
                       ///store value in state variable
-                      stateValue = value;
+                      stateValue = value.abbr;
                     });
                   },
 
@@ -120,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCityChanged: (value) {
                     setState(() {
                       ///store value in city variable
-                      cityValue = value;
+                      cityValue = value.name;
                     });
                   },
                 ),
