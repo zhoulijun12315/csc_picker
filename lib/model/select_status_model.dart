@@ -6,7 +6,7 @@ class Country {
   String? abbr;
   List<Region>? state;
 
-  Country({this.id, this.name, this.emoji, this.emojiU, this.state});
+  Country({this.id, this.name, this.emoji, this.emojiU, this.state, this.abbr});
 
   Country.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -44,7 +44,7 @@ class Region {
   int? countryId;
   List<City>? city;
 
-  Region({this.id, this.name, this.countryId, this.city});
+  Region({this.id, this.name, this.abbr, this.countryId, this.city});
 
   Region.fromJson(Map<String, dynamic> json) {
     id = json['id'];

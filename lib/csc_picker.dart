@@ -97,6 +97,9 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //selected init country
     if (widget.initCountryAbbr != null) {
+      if (this.widget.onCountryChanged != null) {
+        this.widget.onCountryChanged!(Country(abbr: widget.initCountryAbbr));
+      }
       _selectedCountry =
           _countryList.firstWhere((element) => element.abbr == widget.initCountryAbbr, orElse: () => null as Country);
       await getState();
@@ -104,12 +107,19 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //selected init state
     if (widget.initStateAbbr != null) {
+      if (this.widget.onStateChanged != null) {
+        this.widget.onStateChanged!(Region(abbr: widget.initStateAbbr));
+      }
+
       _selectedState = _selectedCountry?.state
           ?.firstWhere((element) => element.abbr == widget.initStateAbbr, orElse: () => null as Region);
       await getCity();
     }
 
     if (widget.initCity != null) {
+      if (this.widget.onCityChanged != null) {
+        this.widget.onCityChanged!(City(name: widget.initCity));
+      }
       _selectedCity = City(name: widget.initCity);
     }
   }
