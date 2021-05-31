@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCountryChanged: (value) {
                     setState(() {
                       ///store value in country variable
-                      countryValue = value.abbr;
+                      countryValue = value?.abbr;
                     });
                   },
 
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onStateChanged: (value) {
                     setState(() {
                       ///store value in state variable
-                      stateValue = value.abbr;
+                      stateValue = value?.abbr;
                     });
                   },
 
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onCityChanged: (value) {
                     setState(() {
                       ///store value in city variable
-                      cityValue = value.name;
+                      cityValue = value?.name;
                     });
                   },
                 ),

@@ -12,9 +12,9 @@ enum Layout { vertical, horizontal }
 enum CountryFlag { SHOW_IN_DROP_DOWN_ONLY, ENABLE, DISABLE }
 
 class CSCPicker extends StatefulWidget {
-  final ValueChanged<Country?>? onCountryChanged;
-  final ValueChanged<Region?>? onStateChanged;
-  final ValueChanged<City?>? onCityChanged;
+  final ValueChanged<Country?> onCountryChanged;
+  final ValueChanged<Region?> onStateChanged;
+  final ValueChanged<City?> onCityChanged;
 
   ///Parameters to change style of CSC Picker
   final TextStyle? selectedItemStyle, dropdownHeadingStyle, dropdownItemStyle;
@@ -37,9 +37,9 @@ class CSCPicker extends StatefulWidget {
   ///CSC Picker Constructor
   const CSCPicker(
       {Key? key,
-      this.onCountryChanged,
-      this.onStateChanged,
-      this.onCityChanged,
+      required this.onCountryChanged,
+      required this.onStateChanged,
+      required this.onCityChanged,
       this.selectedItemStyle,
       this.dropdownHeadingStyle,
       this.dropdownItemStyle,
@@ -97,9 +97,8 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //selected init country
     if (widget.initCountryAbbr != null) {
-      if (this.widget.onCountryChanged != null) {
-        this.widget.onCountryChanged!(Country(abbr: widget.initCountryAbbr));
-      }
+      this.widget.onCountryChanged(Country(abbr: widget.initCountryAbbr));
+
       _selectedCountry =
           _countryList.firstWhere((element) => element.abbr == widget.initCountryAbbr, orElse: () => null as Country);
       await getState();
@@ -107,9 +106,7 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //selected init state
     if (widget.initStateAbbr != null) {
-      if (this.widget.onStateChanged != null) {
-        this.widget.onStateChanged!(Region(abbr: widget.initStateAbbr));
-      }
+      this.widget.onStateChanged(Region(abbr: widget.initStateAbbr));
 
       _selectedState = _selectedCountry?.state
           ?.firstWhere((element) => element.abbr == widget.initStateAbbr, orElse: () => null as Region);
@@ -117,9 +114,7 @@ class _CSCPickerState extends State<CSCPicker> {
     }
 
     if (widget.initCity != null) {
-      if (this.widget.onCityChanged != null) {
-        this.widget.onCityChanged!(City(name: widget.initCity));
-      }
+      this.widget.onCityChanged(City(name: widget.initCity));
       _selectedCity = City(name: widget.initCity);
     }
   }
@@ -131,8 +126,8 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //sort useless
     final state = List<Region>.from(_selectedCountry?.state ?? []);
-    state?.sort((a, b) => a.name!.compareTo(b.name!));
-    _statesList = state ?? [];
+    state.sort((a, b) => a.name!.compareTo(b.name!));
+    _statesList = state;
   }
 
   ///get cities from json response
@@ -142,8 +137,8 @@ class _CSCPickerState extends State<CSCPicker> {
 
     //sort useless
     final city = List<City>.from(_selectedState?.city ?? []);
-    city?.sort((a, b) => a.name!.compareTo(b.name!));
-    _citiesList = city ?? [];
+    city.sort((a, b) => a.name!.compareTo(b.name!));
+    _citiesList = city;
   }
 
   ///get methods to catch newly selected country state and city and populate state based on country, and city based on state
@@ -151,17 +146,9 @@ class _CSCPickerState extends State<CSCPicker> {
     if (!mounted) return;
 
     setState(() {
-      if (this.widget.onCountryChanged != null) {
-        this.widget.onCountryChanged!(value);
-      }
-
-      if (this.widget.onStateChanged != null) {
-        this.widget.onStateChanged!(null);
-      }
-
-      if (this.widget.onCityChanged != null) {
-        this.widget.onCityChanged!(null);
-      }
+      this.widget.onCountryChanged(value);
+      this.widget.onStateChanged(null);
+      this.widget.onCityChanged(null);
 
       _statesList.clear();
       _citiesList.clear();
@@ -176,13 +163,8 @@ class _CSCPickerState extends State<CSCPicker> {
     if (!mounted) return;
 
     setState(() {
-      if (this.widget.onStateChanged != null) {
-        this.widget.onStateChanged!(value);
-      }
-
-      if (this.widget.onCityChanged != null) {
-        this.widget.onCityChanged!(null);
-      }
+      this.widget.onStateChanged(value);
+      this.widget.onCityChanged(null);
 
       _citiesList.clear();
       _selectedState = value;
@@ -194,9 +176,7 @@ class _CSCPickerState extends State<CSCPicker> {
   void _onSelectedCity(City value) {
     if (!mounted) return;
     setState(() {
-      if (this.widget.onCityChanged != null) {
-        this.widget.onCityChanged!(value);
-      }
+      this.widget.onCityChanged(value);
       _selectedCity = value;
     });
   }
