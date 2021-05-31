@@ -155,6 +155,14 @@ class _CSCPickerState extends State<CSCPicker> {
         this.widget.onCountryChanged!(value);
       }
 
+      if (this.widget.onStateChanged != null) {
+        this.widget.onStateChanged!(null);
+      }
+
+      if (this.widget.onCityChanged != null) {
+        this.widget.onCityChanged!(null);
+      }
+
       _statesList.clear();
       _citiesList.clear();
       _selectedCountry = value;
@@ -171,6 +179,11 @@ class _CSCPickerState extends State<CSCPicker> {
       if (this.widget.onStateChanged != null) {
         this.widget.onStateChanged!(value);
       }
+
+      if (this.widget.onCityChanged != null) {
+        this.widget.onCityChanged!(null);
+      }
+
       _citiesList.clear();
       _selectedState = value;
       _selectedCity = null;
