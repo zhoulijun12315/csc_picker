@@ -130,8 +130,9 @@ class _CSCPickerState extends State<CSCPicker> {
     if (!mounted) return;
 
     //sort useless
-    _selectedCountry?.state?.sort((a, b) => a.name!.compareTo(b.name!));
-    _statesList = _selectedCountry?.state ?? [];
+    final state = List<Region>.from(_selectedCountry?.state ?? []);
+    state?.sort((a, b) => a.name!.compareTo(b.name!));
+    _statesList = state ?? [];
   }
 
   ///get cities from json response
@@ -140,8 +141,9 @@ class _CSCPickerState extends State<CSCPicker> {
     if (!mounted) return;
 
     //sort useless
-    _selectedState?.city?.sort((a, b) => a.name!.compareTo(b.name!));
-    _citiesList = _selectedState?.city ?? [];
+    final city = List<City>.from(_selectedState?.city ?? []);
+    city?.sort((a, b) => a.name!.compareTo(b.name!));
+    _citiesList = city ?? [];
   }
 
   ///get methods to catch newly selected country state and city and populate state based on country, and city based on state
